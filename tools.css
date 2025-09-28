@@ -1,0 +1,96 @@
+/* ===== Tools (Expandable Sections) ===== */
+.tool {
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  border: 2px solid var(--alex-gold);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Bar */
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--alex-gold);
+  padding: 12px 20px;
+  font-weight: bold;
+  color: var(--alex-purple);
+  cursor: pointer;
+  min-height: 60px;
+}
+
+/* Expand/Collapse Button in Header */
+.expand-buttons {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Green when closed */
+.expand-buttons[aria-expanded="false"] {
+  background: #28a745;
+  color: white;
+}
+.expand-buttons[aria-expanded="false"]:hover {
+  background: #218838;
+}
+
+/* Red when open */
+.expand-buttons[aria-expanded="true"] {
+  background: #dc3545;
+  color: white;
+}
+.expand-buttons[aria-expanded="true"]:hover {
+  background: #b02a37;
+}
+
+/* Expandable Content */
+.tool-section {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s ease;
+  text-align: center;
+}
+.tool-section.open {
+  max-height: 1000px;
+  padding: 15px;
+}
+
+.tool-section img {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+}
+
+/* Dummy Buttons (inactive tool actions) */
+.dummy-button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: var(--alex-gold);
+  color: var(--alex-purple);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: default;
+}
+.dummy-button:hover {
+  background: var(--alex-purple);
+  color: white;
+}
+
+/* Accessibility Focus */
+.expand-buttons:focus,
+.dummy-button:focus {
+  outline: 3px solid rgba(45, 42, 71, 0.12);
+  outline-offset: 2px;
+}

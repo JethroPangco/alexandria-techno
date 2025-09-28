@@ -1,0 +1,523 @@
+/* ===== Hero Header ===== */
+.hero-header {
+  height: 10vh;   /* shorter section (was 100vh) */
+  min-height: 100px; /* keep a good minimum */
+  background: url("Header.jpg") center center/cover no-repeat;
+  position: relative;
+  width: 100%;
+}
+
+/* Glassmorphism effect for navbar */
+/* Full-width Glassmorphism Navbar */
+.hero-header .navbar {
+  background: rgba(46, 42, 71, 0.25); /* subtle see-through */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* Safari */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+  width: 100%;       /* full width */
+  border-radius: 0;  /* remove rounded corners */
+  margin: 0;         /* remove spacing */
+  padding: 0.75rem 2rem; /* nice breathing room */
+}
+
+.hero-content h1,
+.hero-content p {
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+}
+
+.lead {
+  font-size: 1.8rem;     /* increase size */
+  max-width: 900px;      /* allow wider text block */
+  line-height: 1.6;      /* add breathing room */
+  font-weight: 500;      /* slightly bolder than .lead */
+}
+
+/* Logo */
+.logo {
+  max-height: 40px;
+}
+
+/* Title Overlay (top-center) */
+.carousel-title-overlay {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: #2e2a47; /* same as before */
+}
+
+.footer-link {
+  color: #f5f5f5;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #f5c542; /* highlight color */
+}
+
+.footer i {
+  font-size: 1.3rem; /* slightly larger icons */
+  vertical-align: middle;
+}
+
+/* Hero Header Background */
+.hero-header {
+  position: relative;
+  background: url("Header.jpg") center center/cover no-repeat;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Overlay */
+.hero-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4); 
+  z-index: 1;
+}
+
+/* Navbar above overlay */
+.hero-header .navbar {
+  position: relative;
+  z-index: 3;
+}
+
+/* Hero Content above overlay */
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Core Features Section ===== */
+.core-section {
+  background: #fff; /* clean white background */
+  padding: 100px 0; /* enlarge vertical space */
+}
+
+.core-text h4 {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #6c757d; /* subtle gray */
+  margin-bottom: 10px;
+}
+
+.core-text h2 {
+  font-size: 3rem; /* larger title */
+  color: #2e2a47;
+}
+
+.core-cards {
+  flex: 1;
+}
+
+.core-card {
+  flex: 1;
+  min-width: 280px;
+  padding: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.core-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.upload-card {
+  background: #2e2a47; /* deep blue/purple */
+  color: #fff6e5;
+}
+
+.browse-card {
+  background: #f5c542; /* golden yellow */
+  color: #2e2a47; /* dark text for contrast */
+}
+
+.core-card h3 {
+  font-size: 1.8rem;
+}
+
+.core-card p {
+  font-size: 1.2rem;
+}
+
+/* Description inside carousel */
+.caption-box p {
+  color: #fffdf7;
+  font-size: 1.3rem;     /* was 0.9rem → bigger */
+  line-height: 1.8;      /* more spacing */
+  font-weight: 500;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+/* ===== Advanced Features Section ===== */
+.advanced-section {
+  background: #fff;
+  padding: 100px 0;
+}
+
+.advanced-text h4 {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.advanced-text h2 {
+  font-size: 3rem;
+  color: #2e2a47;
+}
+
+/* Carousel Box */
+.advanced-carousel {
+  width: 100%;
+  max-width: 800px; /* equal to the width of two cards combined */
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.advanced-carousel:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.advanced-carousel img {
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Caption box style (reuse same look as earlier carousel captions) */
+.caption-box {
+  background: rgba(255, 255, 255, 0.15); /* translucent white */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.caption-box h5 {
+  color: #f5c542;
+  font-size: 2rem;
+}
+
+.caption-box p {
+  color: #fffdf7;
+  font-size: 1rem;
+}
+
+.hero-subtext {
+  font-size: 1.6rem;   /* tagline slightly smaller than h1 */
+  max-width: 900px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.hero-learnmore {
+  font-size: 1.3rem;     /* smaller than tagline */
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-weight: 400;    /* lighter than tagline */
+  opacity: 0.9;        /* slightly faded for secondary importance */
+  text-align: center;
+}
+
+.learnmore-btn {
+  background: transparent;
+  color: #fafafa;
+  border: 4px solid #f5c542;
+  padding: 10px 22px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.learnmore-btn:hover {
+  background: #ffffff;
+  color: #2e2a47;
+  transform: scale(1.05);
+}
+
+.collapse-wrapper {
+  min-height: 150px;   /* reserve space for collapsed content */
+  position: relative;
+  margin-top: 20px;
+}
+
+.collapse {
+  transition: height 0.6s ease;
+}
+
+/* Mission & Vision Section */
+.mission-vision-section {
+  display: flex;
+  flex-wrap: wrap;     /* allows stacking on smaller screens */
+  width: 100%;
+  min-height: 20vh;   /* full height on desktop */
+}
+
+.mission, .vision {
+  flex: 1 1 50%;       /* each takes 50% by default */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30vh;    /* ensures decent height when stacked */
+  padding: 20px;
+  background-attachment: fixed;
+}
+
+/* Background Images */
+.mission {
+  background-image: url("Library.jpg"); /* replace with your mission image */
+}
+
+.vision {
+  background-image: url("Vision.jpg"); /* replace with your vision image */
+}
+
+/* Overlay for text readability */
+.mission::before, .vision::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55); /* slightly darker for readability */
+  z-index: 1;
+}
+
+/* Text */
+.overlay-text {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  max-width: 500px;
+}
+
+.overlay-text h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem); /* dynamic size */
+  margin-bottom: 15px;
+}
+
+.overlay-text p {
+  font-size: clamp(1rem, 2vw, 1.3rem);  /* dynamic size */
+  line-height: 1.6;
+}
+
+/* Responsive stacking */
+@media (max-width: 992px) {
+  .mission, .vision {
+    flex: 1 1 100%;   /* stack vertically */
+    min-height: 40vh; /* taller on smaller screens */
+  }
+}
+
+/* ===== Modal Overlay ===== */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(46, 42, 71, 0.85); /* dark overlay */
+  backdrop-filter: blur(6px); /* glass blur */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex; /* when JS adds .show, it appears */
+}
+
+/* ===== Modal Content ===== */
+.modal-content {
+  background: rgba(255, 255, 255, 0.95); /* semi-transparent white */
+  border-radius: 16px;
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.4s ease;
+  text-align: left;
+  position: relative;
+  animation: zoomIn 0.3s ease;
+}
+
+/* ===== Modal Title ===== */
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #2e2a47;
+  text-align: center;
+}
+
+/* ===== Close Button ===== */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e2a47;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.close:hover {
+  color: #f5c542;
+}
+
+/* ===== Form Styles ===== */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-content label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #2e2a47;
+}
+
+.modal-content input {
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.modal-content input:focus {
+  border-color: #f5c542;
+  box-shadow: 0 0 6px rgba(245, 197, 66, 0.4);
+}
+
+/* ===== Buttons ===== */
+.modal-content button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Primary (Register) */
+.modal-content .btn-primary {
+  background: #f5c542;
+  color: #2e2a47;
+}
+.modal-content .btn-primary:hover {
+  background: #e0b731;
+  color: #fff;
+}
+
+/* Secondary (Login) */
+.modal-content .btn-secondary {
+  background: #2e2a47;
+  color: #fff;
+}
+.modal-content .btn-secondary:hover {
+  background: #1f1b36;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding-right: 40px; /* space for the eye button */
+}
+
+.form-floating {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.toggle-password:hover {
+  color: #f5c542; /* matches your theme */
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+
+.navbar-nav .nav-link {
+  margin: 0 12px; /* evenly space links */
+  font-weight: 500;
+}
+
+.navbar .btn {
+  min-width: 90px;
+}
+
+.hero-content h1 {
+  background: linear-gradient(90deg, #f5c542, #fff6e5, #f5c542);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}

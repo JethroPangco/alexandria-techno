@@ -1,0 +1,234 @@
+:root {
+  --alex-gold: #f5c542;
+  --alex-purple: #2e2a47;
+  --alex-bg: #fff6e5;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: #1c1c1e;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: left 0.3s ease, width 0.3s ease;
+}
+.sidebar .nav-link {
+  color: #ddd;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+.sidebar .nav-link:hover {
+  background: var(--alex-gold);
+  color: var(--alex-purple);
+}
+.sidebar .nav-link.active {
+  background: var(--alex-gold);
+  color: var(--alex-purple);
+  font-weight: bold;
+}
+.logo-small {
+  max-height: 35px;
+}
+
+/* ===== Main Content ===== */
+main {
+  margin-left: 240px; /* offset for sidebar */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  min-width: 0;
+  transition: margin-left 0.3s ease;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to right, var(--alex-purple), #4b3f72);
+  min-height: 35vh;
+  text-align: center;
+  padding: 50px 20px;
+}
+.hero-section .highlight {
+  color: var(--alex-gold);
+}
+
+/* ===== Upload Hero/Header Section ===== */
+.upload-header {
+  background: linear-gradient(to right, var(--alex-purple), #4b3f72);
+  min-height: 30vh;
+  text-align: center;
+  padding: 40px 20px;
+  color: white;
+}
+.upload-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.upload-header p {
+  font-size: 1.1rem;
+  color: var(--alex-gold);
+}
+
+/* ===== Upload Form Section ===== */
+.upload-main {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+#uploadForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#uploadForm label {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 5px;
+  color: var(--alex-purple);
+}
+#uploadForm input[type="text"],
+#uploadForm input[type="number"],
+#uploadForm input[type="file"],
+#uploadForm textarea {
+  padding: 12px;
+  border: 2px solid var(--alex-gold);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+#uploadForm textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+#uploadForm button {
+  margin-top: 10px;
+  background: var(--alex-gold);
+  color: var(--alex-purple);
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 12px 20px;
+  transition: 0.3s;
+  border: none;
+}
+#uploadForm button:hover {
+  background: var(--alex-purple);
+  color: white;
+}
+
+/* ===== Results Section (Published Works Grid) ===== */
+.results-section {
+  max-width: 1200px;
+  margin: 20px auto 50px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 0 20px;
+}
+
+/* ===== Result Cards (match Browse) ===== */
+.result-card {
+  position: relative;
+  background: #fffdf7;
+  border-radius: 12px;
+  border-top: 5px solid var(--alex-gold);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: left;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+.result-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+}
+.result-card h3 {
+  color: var(--alex-purple);
+  margin-bottom: 12px;
+}
+.result-card p {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Card Buttons */
+.card-buttons {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 10px;
+}
+.view-btn,
+.remove-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+}
+.view-btn {
+  background: var(--alex-gold);
+  color: var(--alex-purple);
+}
+.view-btn:hover {
+  background: var(--alex-purple);
+  color: white;
+}
+.remove-btn {
+  background: #e44a8c;
+  color: white;
+}
+.remove-btn:hover {
+  background: #732e5c;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid black;
+  margin: 40px auto;
+  width: 80%;
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--alex-purple);
+  color: var(--alex-bg);
+  padding: 20px;
+  text-align: center;
+}
+.footer-link {
+  color: #f5f5f5;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+.footer-link:hover {
+  color: var(--alex-gold);
+}
+.footer i {
+  font-size: 1.3rem;
+  vertical-align: middle;
+}
+
+/* ===== Responsive Sidebar ===== */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 200px;
+  }
+  main {
+    margin-left: 200px;
+  }
+}
