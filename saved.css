@@ -51,13 +51,12 @@ body.d-flex {
 /* Main Content: make it a flex column that fills the remaining viewport height */
 main {
   margin-left: 240px; /* offset for sidebar */
-  flex: 1 1 auto;     /* allow main to grow and shrink */
+  flex: 1 0 auto;     /* don’t force shrink */
   display: flex;
   flex-direction: column;
   background: white;
-  min-width: 0;       /* prevents overflow due to long content */
-  min-height: 0;      /* allow children to manage height */
-  transition: margin-left 0.3s ease;
+  min-width: 0;
+  min-height: 100vh;  /* ensure it can stretch fully */
 }
 
 /* Hero Section */
@@ -101,13 +100,11 @@ main {
 
 /* Results section: keep grid for cards but allow it to grow (flex) */
 .results-section {
-  flex: 1 1 auto; /* <-- this makes it take remaining vertical space */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
   padding: 20px;
-  align-content: start; /* keep grid items at the top when present */
-  min-height: 0; /* allow it to shrink properly inside flex parent */
+  align-content: start;
 }
 
 /* When there are no results we switch the layout to a centered message */
