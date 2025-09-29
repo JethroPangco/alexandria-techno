@@ -6,12 +6,19 @@ async function loadWorks() {
   try {
     const response = await fetch("works.json");
     works = await response.json();
+
+    // Tag all preloaded works
+    works = works.map(w => ({ ...w, source: "preloaded" }));
   } catch (error) {
     console.error("Error loading works.json:", error);
   }
 
-  // Load uploads from localStorage
-  const uploaded = JSON.parse(localStorage.getItem("uploadedWorks")) || [];
+  // Load uploads from localStorage + tag them
+  const uploaded =
+    (JSON.parse(localStorage.getItem("uploadedWorks")) || []).map(w => ({
+      ...w,
+      source: "uploaded",
+    }));
 
   // Merge both
   allWorks = [...works, ...uploaded]; // 🔑 assign to global
@@ -24,16 +31,17 @@ async function loadWorks() {
 
   function filterSaved() {
     const query = searchInput.value.toLowerCase();
-    const filtered = allSaved.filter(work =>
-      work.title.toLowerCase().includes(query) ||
-      work.author.toLowerCase().includes(query) ||
-      work.category.toLowerCase().includes(query)
+    const filtered = allWorks.filter(
+      work =>
+        work.title.toLowerCase().includes(query) ||
+        work.author.toLowerCase().includes(query) ||
+        work.category.toLowerCase().includes(query)
     );
-    displaySaved(filtered);
+    displayResults(filtered);
   }
 
   searchBtn.addEventListener("click", filterSaved);
-  searchInput.addEventListener("keypress", (e) => {
+  searchInput.addEventListener("keypress", e => {
     if (e.key === "Enter") {
       filterSaved();
     }
@@ -53,13 +61,17 @@ function displayResults(works) {
     const card = document.createElement("div");
     card.classList.add("result-card");
 
-    const viewLink =  work.file
-    ? `retrieve.html?uploadedId=${work.id}`  // uploaded work
-    : `retrieve.html?id=${work.id}`;    
+    // Use source to decide link type
+    const viewLink =
+      work.source === "uploaded"
+        ? `retrieve.html?uploadedId=${work.id}`
+        : `retrieve.html?id=${work.id}`;
 
     card.innerHTML = `
       <div class="result-card-content">
-        <h3>${work.title}${work.subtitle ? ` — <em>${work.subtitle}</em>` : ""}</h3>
+        <h3>${work.title}${
+      work.subtitle ? ` — <em>${work.subtitle}</em>` : ""
+    }</h3>
         <p><strong>Author:</strong> ${work.author}</p>
         <p><strong>Publisher:</strong> ${work.publisher}</p>
         <p><strong>Year:</strong> ${work.year}</p>
@@ -68,7 +80,7 @@ function displayResults(works) {
       </div>
       <div class="card-buttons">
         <a class="btn view-btn" href="${viewLink}">View</a>
-        <button class="btn save-btn" onclick="saveWork(${work.id})">Save</button>
+        <button class="btn save-btn" onclick="saveWork(${work.id}, '${work.source}')">Save</button>
       </div>
     `;
 
@@ -76,15 +88,11 @@ function displayResults(works) {
   });
 }
 
-function viewWork(index) {
-  window.location.href = `retrieve.html?id=${index}`;
-}
-
 window.onload = loadWorks;
 
-function saveWork(id) {
+function saveWork(id, source) {
   const saved = JSON.parse(localStorage.getItem("savedWorks")) || [];
-  const work = allWorks.find(w => w.id === id); // 🔑 find by ID
+  const work = allWorks.find(w => w.id === id && w.source === source); // 🔑 also check source
   if (work) {
     saved.push(work);
     localStorage.setItem("savedWorks", JSON.stringify(saved));
