@@ -1,91 +1,395 @@
-document.getElementById("uploadForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alexandria | Welcome</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
 
-  // 🔑 Get next ID counter from localStorage or start at 35
-  let nextId = parseInt(localStorage.getItem("nextUploadId")) || 35;
+  <!-- ===== Hero Header with Navbar ===== -->
+  <header class="hero-header d-flex flex-column">
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-4">
+  <div class="container-fluid">
+    <!-- Left: Logo -->
+    <a class="navbar-brand fw-bold text-light" href="#">
+      <img src="Alexandria_Logo2.png" alt="Logo" class="logo me-2">
+    </a>
 
-  const newWork = {
-    id: nextId, // assign unique ID
-    title: document.getElementById("title").value || "Untitled",
-    subtitle: document.getElementById("subtitle").value || null,
-    author: document.getElementById("author").value,
-    publisher: document.getElementById("publisher").value,
-    year: document.getElementById("year").value,
-    category: document.getElementById("category").value,
-    abstract: document.getElementById("abstract").value,
-    file: document.getElementById("file").files[0]?.name || null,
-  };
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  let storedWorks = JSON.parse(localStorage.getItem("uploadedWorks")) || [];
-  storedWorks.push(newWork);
-  localStorage.setItem("uploadedWorks", JSON.stringify(storedWorks));
+    <!-- Center + Right: Links & Buttons -->
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+      <!-- Center Nav Links -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#features">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#goals">Goals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#contacts">Contacts</a>
+        </li>
+      </ul>
 
-  // 🔑 Increment and save counter for next upload
-  localStorage.setItem("nextUploadId", nextId + 1);
+      <!-- Right Buttons -->
+      <div class="d-flex">
+        <button class="btn btn-outline-light me-2" onclick="openModal('loginModal')">Login</button>
+        <button class="btn btn-warning fw-bold" onclick="openModal('registerModal')">Register</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
-  alert("Your work has been uploaded successfully!");
+    <!-- Hero Content -->
+    <div class="hero-content text-center text-light d-flex flex-column justify-content-center align-items-center flex-grow-1">
+      <h1 class="display-3 fw-bold">Welcome to Alexandria</h1>
+      <p class="lead">Your digital repository for theses, capstones, and scholarly works.</p>
 
-  loadPublishedWorks();
-  this.reset();
-});
+      <!-- Learn More Button -->
+      <button class="btn learnmore-btn fw-bold mt-3" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#learnMore"
+              aria-expanded="false" aria-controls="learnMore">
+        Learn More
+      </button>
 
-function loadPublishedWorks() {
-  const published = JSON.parse(localStorage.getItem("uploadedWorks")) || [];
-  displayPublished(published);
+      <!-- Collapsible Wrapper (keeps space reserved) -->
+      <div class="collapse-wrapper">
+        <div id="learnMore" class="collapse">
+          <p class="hero-learnmore">
+            Alexandria is a modern academic repository where students and researchers can upload,
+            browse, and archive theses, capstones, and scholarly works. Featuring advanced tools like
+            translation, plagiarism detection, highlighting, and citation generation, it aims to
+            empower learners and educators in their academic journey.
+          </p>
+        </div>
+    </div>
+  </header>
+
+  <!-- ===== Core Features Section ===== -->
+<section id="features" class="core-section py-5">
+  <div class="container d-flex flex-column flex-lg-row align-items-center">
+    
+    <!-- Left Text -->
+    <div class="core-text mb-5 mb-lg-0 me-lg-5 text-lg-start text-center">
+      <h4 class="fw-bold text-uppercase text-secondary">Presenting</h4>
+      <h2 class="display-4 fw-bold text-dark">Our Core Features</h2>
+    </div>
+
+    <!-- Right Cards -->
+    <div class="core-cards d-flex flex-column flex-md-row gap-5">
+      
+      <!-- Upload Card -->
+      <div class="core-card upload-card p-5 rounded shadow-lg text-light">
+        <h3 class="fw-bold mb-3">Upload Works</h3>
+        <p class="fs-5">Contribute to the growing repository by uploading your thesis, capstone, or research paper.</p>
+      </div>
+
+      <!-- Browse Card -->
+      <div class="core-card browse-card p-5 rounded shadow-lg">
+        <h3 class="fw-bold mb-3">Browse Works</h3>
+        <p class="fs-5">Discover a wide collection of scholarly works shared by students and researchers.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Advanced Features Section ===== -->
+<section class="advanced-section py-5">
+  <div class="container d-flex flex-column flex-lg-row align-items-center gap-5">
+
+    <!-- Left Carousel Box -->
+    <div class="advanced-carousel shadow-lg rounded overflow-hidden flex-grow-1">
+      <div id="advancedFeaturesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+        <div class="carousel-inner">
+
+          <!-- Translation Tool -->
+          <div class="carousel-item active">
+            <img src="Translate.jpg" class="d-block w-100" alt="Translation Tool">
+            <div class="carousel-caption d-none d-md-block caption-box">
+              <h5 class="caption-title">Translation Tool</h5>
+              <p class="caption-desc">Seamlessly translate works into multiple languages.</p>
+            </div>
+          </div>
+
+          <!-- Highlighting Tool -->
+          <div class="carousel-item">
+            <img src="Highlight.jpg" class="d-block w-100" alt="Highlighting Tool">
+            <div class="carousel-caption d-none d-md-block caption-box">
+              <h5 class="caption-title">Highlighting & Notes</h5>
+              <p class="caption-desc">Mark important sections and keep your notes organized.</p>
+            </div>
+          </div>
+
+          <!-- Citation Generator -->
+          <div class="carousel-item">
+            <img src="Citation.jpg" class="d-block w-100" alt="Citation Generator">
+            <div class="carousel-caption d-none d-md-block caption-box">
+              <h5 class="caption-title">Citation Generator</h5>
+              <p class="caption-desc">Automatically generate citations in multiple formats.</p>
+            </div>
+          </div>
+
+          <!-- Task Tracker -->
+          <div class="carousel-item">
+            <img src="Task Tracker.jpg" class="d-block w-100" alt="Task Tracker">
+            <div class="carousel-caption d-none d-md-block caption-box">
+              <h5 class="caption-title">Task Tracker</h5>
+              <p class="caption-desc">Stay productive with a built-in task management tool.</p>
+            </div>
+          </div>
+
+          <!-- Plagiarism Checker -->
+          <div class="carousel-item">
+            <img src="Plaigarism.jpg" class="d-block w-100" alt="Plagiarism Checker">
+            <div class="carousel-caption d-none d-md-block caption-box">
+              <h5 class="caption-title">Plagiarism Checker</h5>
+              <p class="caption-desc">Ensure originality with powerful plagiarism detection.</p>
+            </div>
+          </div>
+
+          <!-- Grammar & Spelling Checker -->
+          <div class="carousel-item">
+            <img src="Grammar.jpg" class="d-block w-100" alt="Grammar Checker">
+            <div class="carousel-caption d-none d-md-block caption-box">
+              <h5 class="caption-title">Grammar & Spelling Checker</h5>
+              <p class="caption-desc">Write better with instant grammar and spelling corrections.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#advancedFeaturesCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#advancedFeaturesCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Text -->
+    <div class="advanced-text text-lg-start text-center">
+      <h4 class="fw-bold text-uppercase text-secondary">Furthermore</h4>
+      <h2 class="display-4 fw-bold text-dark">Our Advanced Features</h2>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Mission & Vision Section ===== -->
+<section id="goals" class="mission-vision-section">
+  <!-- Mission -->
+  <div class="mission d-flex align-items-center justify-content-center text-center text-light">
+    <div class="overlay-text">
+      <h2 class="fw-bold">Our Mission</h2>
+      <p>
+        Alexandria exists to make scholarly works more visible, accessible, and useful 
+        by building a centralized, and student-centered digital repository. 
+        Through partnerships with schools and the power of advanced technology, 
+        we provide affordable tools and sustainable access to scholarly works, 
+        empowering students to learn, connect, and contribute to the academic community.
+      </p>
+    </div>
+  </div>
+
+  <!-- Vision -->
+  <div class="vision d-flex align-items-center justify-content-center text-center text-light">
+    <div class="overlay-text">
+      <h2 class="fw-bold">Our Vision</h2>
+      <p>
+        To be the leading academic hub where every student and researchers 
+        can freely access, share, and build upon the knowledge of generations.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer id="contacts" class="footer py-4 text-light">
+  <div class="container">
+    <div class="row align-items-center">
+      
+      <!-- Left: Social Media -->
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <a href="mailto:alexandria@gmail.com" class="footer-link me-3">
+          <i class="bi bi-envelope-fill"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" class="footer-link me-3">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="footer-link me-3">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank" class="footer-link">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+      </div>
+
+      <!-- Right: Policies -->
+      <div class="col-md-6 text-center text-md-end">
+        <a href="#" class="footer-link me-3">Terms & Conditions</a>
+        <a href="#" class="footer-link me-3">Privacy Policy</a>
+        <a href="#" class="footer-link">Accessibility Policy</a>
+        <a href="#" class="footer-link">Cookie Policy</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom Line -->
+    <div class="text-center mt-3">
+      <small>© 2025 Alexandria Repository — Prototype</small>
+    </div>
+  </div>
+</footer>
+
+  <!-- ===== Modals ===== -->
+<!-- Register Modal -->
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('registerModal')">&times;</span>
+    <h2>Create an Account</h2>
+    <form id="registerForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="registerPassword">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="registerPassword" required>
+        <button type="button" class="toggle-password" data-target="#registerPassword">
+          <i class="bi bi-eye"></i>
+        </button>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('loginModal')">&times;</span>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" required>
+
+      <label for="loginPassword">Password</label>
+      <div class="password-wrapper">
+        <input type="password" id="loginPassword" required>
+        <button type="button" class="toggle-password" data-target="#loginPassword">
+          <i class="bi bi-eye"></i> <!-- make sure this starts as eye -->
+        </button>
+      </div>
+
+      <button type="submit" class="btn btn-secondary">Login</button>
+    </form>
+  </div>
+</div>
+
+  <!-- ===== Scripts ===== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="modal.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Handle login form submit
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        window.location.href = "dashboard.html";
+      });
+    }
+
+    // Handle register form submit
+    const registerForm = document.getElementById("registerForm");
+    if (registerForm) {
+      registerForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        window.location.href = "dashboard.html";
+      });
+    }
+
+    // Toggle password visibility with Bootstrap Icons
+    document.querySelectorAll(".toggle-password").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const input = document.querySelector(this.getAttribute("data-target"));
+        const icon = this.querySelector("i");
+
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.replace("bi-eye", "bi-eye-slash");
+        } else {
+          input.type = "password";
+          icon.classList.replace("bi-eye-slash", "bi-eye");
+        }
+      });
+    });
+  });
+
+  // ===== Modal Functions =====
+  // Open modal
+function openModal(id) {
+  const modal = document.getElementById(id);
+  modal.style.display = "flex"; // ensure flex centering
 }
 
-function displayPublished(works) {
-  const publishedSection = document.getElementById("publishedSection");
-  publishedSection.innerHTML = "";
+// Close modal
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  modal.style.display = "none";
 
-  if (works.length === 0) {
-    publishedSection.innerHTML = "<p>No works published yet.</p>";
-    return;
+  // Reset the form inside the modal (if any)
+  const form = modal.querySelector("form");
+  if (form) form.reset();
+
+  // Reset password visibility back to hidden + eye icon
+  const pwInput = modal.querySelector("input[type='text'][id$='Password']");
+  if (pwInput) {
+    pwInput.type = "password"; // back to password
   }
 
-  works.forEach((work, index) => {
-    const card = document.createElement("div");
-    card.classList.add("result-card");
+  const icon = modal.querySelector(".toggle-password i");
+  if (icon) {
+    icon.classList.remove("bi-eye-slash");
+    icon.classList.add("bi-eye"); // back to default eye
+  }
+}
 
-    card.innerHTML = `
-      <div class="result-card-content">
-        <h3>${work.title}${work.subtitle ? ` — <em>${work.subtitle}</em>` : ""}</h3>
-        <p><strong>Author:</strong> ${work.author}</p>
-        <p><strong>Publisher:</strong> ${work.publisher}</p>
-        <p><strong>Year:</strong> ${work.year}</p>
-        <p><strong>Category:</strong> ${work.category}</p>
-        <p><strong>Abstract:</strong> ${work.abstract}</p>
-      </div>
-      <div class="card-buttons">
-        <button class="btn view-btn" onclick="viewUploadedWork(${work.id})">View</button>
-        <button class="btn remove-btn" onclick="removePublished(${index})">Unpublish</button>
-      </div>
-    `;
+// Close modal if clicking outside content
+window.onclick = function(event) {
+  document.querySelectorAll(".modal").forEach(modal => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      const form = modal.querySelector("form");
+      if (form) form.reset();
 
-    publishedSection.appendChild(card);
+      const pwInput = modal.querySelector("input[type='text'][id$='Password']");
+      if (pwInput) pwInput.type = "password";
+
+      const icon = modal.querySelector(".toggle-password i");
+      if (icon) {
+        icon.classList.remove("bi-eye-slash");
+        icon.classList.add("bi-eye");
+      }
+    }
   });
-}
+};
+</script>
 
-/* 🔑 View handler */
-function viewUploadedWork(id) {
-  window.location.href = `retrieve.html?uploadedId=${id}`;
-}
-
-function removePublished(index) {
-  const published = JSON.parse(localStorage.getItem("uploadedWorks")) || [];
-  published.splice(index, 1);
-  localStorage.setItem("uploadedWorks", JSON.stringify(published));
-  loadPublishedWorks();
-}
-
-window.onload = loadPublishedWorks;
-
-/* === Expand/Collapse Tool Logic === */
-function toggleTool(id, button) {
-  const section = document.getElementById(id);
-  section.classList.toggle("open");
-
-  const expanded = section.classList.contains("open");
-  button.setAttribute("aria-expanded", expanded);
-  button.textContent = expanded ? "Collapse" : "Expand";
-}
+</body>
+</html>
