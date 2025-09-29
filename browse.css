@@ -44,6 +44,7 @@ main {
   background: white;
   min-width: 0;
   transition: margin-left 0.3s ease;
+  min-height: 100vh; /* ensure it fills screen */
 }
 
 /* Hero Section */
@@ -91,7 +92,9 @@ main {
   color: var(--alex-bg);
   padding: 20px;
   text-align: center;
+  margin-top: auto; /* push footer to bottom */
 }
+
 .footer-link {
   color: #f5f5f5;
   text-decoration: none;
@@ -132,4 +135,8 @@ main {
   justify-content: flex-end;
   gap: 10px;
   flex-shrink: 0;
+}
+
+.results-section {
+  flex: 1; /* takes up remaining space */
 }
