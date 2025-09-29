@@ -12,7 +12,7 @@ function displaySaved(works) {
     return;
   }
 
-  works.forEach((work, index) => {
+  works.forEach(work => {
     const card = document.createElement("div");
     card.classList.add("result-card");
 
@@ -26,8 +26,8 @@ function displaySaved(works) {
         <p><strong>Abstract:</strong> ${work.abstract}</p>
       </div>
       <div class="card-buttons">
-        <button class="btn view-btn" onclick="viewSaved(${index})">View</button>
-        <button class="btn remove-btn" onclick="removeSaved(${index})">Remove</button>
+        <button class="btn view-btn" onclick="viewSaved(${work.id})">View</button>
+        <button class="btn remove-btn" onclick="removeSaved(${work.id})">Remove</button>
       </div>
     `;
 
@@ -35,14 +35,14 @@ function displaySaved(works) {
   });
 }
 
-function viewSaved(index) {
-  // Redirect to retrieve.html with ?savedId
-  window.location.href = `retrieve.html?savedId=${index}`;
+function viewSaved(id) {
+  // Redirect with ID instead of index
+  window.location.href = `retrieve.html?savedId=${id}`;
 }
 
-function removeSaved(index) {
-  const saved = JSON.parse(localStorage.getItem("savedWorks")) || [];
-  saved.splice(index, 1); // remove 1 item at position index
+function removeSaved(id) {
+  let saved = JSON.parse(localStorage.getItem("savedWorks")) || [];
+  saved = saved.filter(work => work.id !== id); // remove by ID
   localStorage.setItem("savedWorks", JSON.stringify(saved));
   loadSavedWorks(); // refresh display
 }
@@ -70,10 +70,12 @@ function loadSavedWorks() {
     displaySaved(filtered);
   }
 
-  searchBtn.addEventListener("click", filterSaved);
-  searchInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      filterSaved();
-    }
-  });
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener("click", filterSaved);
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        filterSaved();
+      }
+    });
+  }
 }
