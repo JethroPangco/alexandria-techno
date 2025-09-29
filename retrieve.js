@@ -9,6 +9,7 @@ async function loadWorkDetails() {
 
   const idParam = getQueryParam("id");
   const uploadedIdParam = getQueryParam("uploadedId");
+  const savedIdParam = getQueryParam("savedId"); // ✅ NEW for Archive
 
   // Case 1: Uploaded work
   if (uploadedIdParam !== null) {
@@ -20,21 +21,25 @@ async function loadWorkDetails() {
       return;
     }
 
-    detailsDiv.innerHTML = `
-      <h3>${work.title}${work.subtitle ? ` — <em>${work.subtitle}</em>` : ""}</h3>
-      <p><strong>ID:</strong> ${work.id}</p>
-      <p><strong>Author:</strong> ${work.author}</p>
-      <p><strong>Publisher:</strong> ${work.publisher}</p>
-      <p><strong>Year:</strong> ${work.year}</p>
-      <p><strong>Category:</strong> ${work.category}</p>
-      <p><strong>Abstract:</strong> ${work.abstract}</p>
-      ${work.file ? `<a href="files/${work.file}" target="_blank" class="btn view-file">View File</a>` : ""}
-      <button class="btn btn-warning mt-3" onclick="editWork(${work.id})">Edit</button>
-    `;
+    renderWorkDetails(work, true); // editable
     return;
   }
 
-  // Case 2: Preloaded work (works.json)
+  // Case 2: Saved work (Archive)
+  if (savedIdParam !== null) {
+    const saved = JSON.parse(localStorage.getItem("savedWorks")) || [];
+    const work = saved.find(w => w.id === parseInt(savedIdParam));
+
+    if (!work) {
+      detailsDiv.innerHTML = "<p>Saved work not found.</p>";
+      return;
+    }
+
+    renderWorkDetails(work, work.source === "uploaded"); // editable only if uploaded
+    return;
+  }
+
+  // Case 3: Preloaded work (works.json)
   if (idParam === null) {
     detailsDiv.innerHTML = "<p>Error: No work selected.</p>";
     return;
@@ -51,20 +56,28 @@ async function loadWorkDetails() {
       return;
     }
 
-    detailsDiv.innerHTML = `
-      <h3>${work.title}${work.subtitle ? ` — <em>${work.subtitle}</em>` : ""}</h3>
-      <p><strong>ID:</strong> ${work.id}</p>
-      <p><strong>Author:</strong> ${work.author}</p>
-      <p><strong>Publisher:</strong> ${work.publisher}</p>
-      <p><strong>Year:</strong> ${work.year}</p>
-      <p><strong>Category:</strong> ${work.category}</p>
-      <p><strong>Abstract:</strong> ${work.abstract}</p>
-      ${work.file ? `<a href="files/${work.file}" target="_blank" class="btn view-file">View File</a>` : ""}
-    `;
+    renderWorkDetails(work, false);
   } catch (error) {
     console.error("Error loading details:", error);
     detailsDiv.innerHTML = "<p>Failed to load work details.</p>";
   }
+}
+
+// === Render details into DOM ===
+function renderWorkDetails(work, editable = false) {
+  const detailsDiv = document.getElementById("workDetails");
+
+  detailsDiv.innerHTML = `
+    <h3>${work.title}${work.subtitle ? ` — <em>${work.subtitle}</em>` : ""}</h3>
+    <p><strong>ID:</strong> ${work.id}</p>
+    <p><strong>Author:</strong> ${work.author}</p>
+    <p><strong>Publisher:</strong> ${work.publisher}</p>
+    <p><strong>Year:</strong> ${work.year}</p>
+    <p><strong>Category:</strong> ${work.category}</p>
+    <p><strong>Abstract:</strong> ${work.abstract}</p>
+    ${work.file ? `<a href="files/${work.file}" target="_blank" class="btn view-file">View File</a>` : ""}
+    ${editable ? `<button class="btn btn-warning mt-3" onclick="editWork(${work.id})">Edit</button>` : ""}
+  `;
 }
 
 // ===== Editable Mode for Uploaded Works =====
@@ -155,7 +168,7 @@ function editWork(id) {
 // Init
 window.addEventListener("DOMContentLoaded", loadWorkDetails);
 
-/* === Expand/Collapse Tool Logic (shared with upload page) === */
+/* === Expand/Collapse Tool Logic === */
 function toggleTool(id, button) {
   const section = document.getElementById(id);
   section.classList.toggle("open");
