@@ -21,16 +21,22 @@ async function loadWorks() {
     }));
 
   // Merge both
-  allWorks = [...works, ...uploaded]; // 🔑 assign to global
+  allWorks = [...works, ...uploaded];
 
   displayResults(allWorks);
+}
 
-  // === Search functionality ===
-  const searchInput = document.getElementById("savedSearchInput");
-  const searchBtn = document.getElementById("savedSearchBtn");
+function setupSearch() {
+  const searchInput = document.getElementById("browseSearchInput");
+  const searchBtn = document.getElementById("browseSearchBtn");
 
-  function filterSaved() {
-    const query = searchInput.value.toLowerCase();
+  if (!searchInput || !searchBtn) {
+    console.warn("Search bar not found on Browse page.");
+    return;
+  }
+
+  function filterBrowse() {
+    const query = searchInput.value.toLowerCase().trim();
     const filtered = allWorks.filter(
       work =>
         work.title.toLowerCase().includes(query) ||
@@ -40,10 +46,11 @@ async function loadWorks() {
     displayResults(filtered);
   }
 
-  searchBtn.addEventListener("click", filterSaved);
+  searchBtn.addEventListener("click", filterBrowse);
   searchInput.addEventListener("keypress", e => {
     if (e.key === "Enter") {
-      filterSaved();
+      e.preventDefault();
+      filterBrowse();
     }
   });
 }
@@ -69,9 +76,7 @@ function displayResults(works) {
 
     card.innerHTML = `
       <div class="result-card-content">
-        <h3>${work.title}${
-      work.subtitle ? ` — <em>${work.subtitle}</em>` : ""
-    }</h3>
+        <h3>${work.title}${work.subtitle ? ` — <em>${work.subtitle}</em>` : ""}</h3>
         <p><strong>Author:</strong> ${work.author}</p>
         <p><strong>Publisher:</strong> ${work.publisher}</p>
         <p><strong>Year:</strong> ${work.year}</p>
@@ -88,14 +93,18 @@ function displayResults(works) {
   });
 }
 
-window.onload = loadWorks;
-
 function saveWork(id, source) {
   const saved = JSON.parse(localStorage.getItem("savedWorks")) || [];
-  const work = allWorks.find(w => w.id === id && w.source === source); // 🔑 also check source
+  const work = allWorks.find(w => w.id === id && w.source === source);
   if (work) {
     saved.push(work);
     localStorage.setItem("savedWorks", JSON.stringify(saved));
     alert("Work saved!");
   }
 }
+
+// ✅ Wait until DOM is ready before setting up
+window.addEventListener("DOMContentLoaded", () => {
+  loadWorks();
+  setupSearch();
+});
